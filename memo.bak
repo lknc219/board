@@ -1,0 +1,12 @@
+git 연결허기
+
+로그인기능 만들고 로그인 후 게시판 글 작성 구현하기
+
+
+GetMapping
+PostMapping
+RequestMapping
+
+스프링 시큐리티
+
+비밀번호 암호화 후   회원가입 안되는 현상 수정하기
