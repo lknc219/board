@@ -37,7 +37,7 @@ class MemberServiceTest {
         em.flush();
 
         //when
-        assertEquals(saveId,memberRepository.findByLonginId(memberForm.getLoginId()).get());
+        assertEquals(saveId,memberRepository.findByLonginId(memberForm.getLoginId()).get().getId());
 
         //then
 

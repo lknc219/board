@@ -38,7 +38,7 @@ public class MemberService implements UserDetailsService {
     public Long memberSave(MemberForm form) {
 
         Optional<Member> findMember = memberRepository.findByLonginId(form.getLoginId());
-        if (findMember.get().getId()!=null){
+        if (!findMember.isEmpty()){
             log.info("아이디 중복");
             throw new IllegalStateException("회원 아이디 중복");
         }
