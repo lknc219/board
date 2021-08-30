@@ -14,10 +14,9 @@ spring:
         format_sql: true
         default_batch_fetch_size: 100
 
-#  thymeleaf:
-#    prefix: classpath:templates/
-#    suffix: .html
-#    cache: false
+  thymeleaf:
+    enabled: true
+    encoding: UTF-8
 
 logging.level:
   org.hibernate.SQL: debug

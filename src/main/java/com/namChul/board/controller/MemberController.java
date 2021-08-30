@@ -20,7 +20,7 @@ public class MemberController {
     @GetMapping("member/join")
     public String memberJoinPage() {
         log.info("member join page");
-        return "member/memberJoin";
+        return "/member/memberJoin";
     }
 
     @PostMapping("member/insert")
@@ -34,19 +34,19 @@ public class MemberController {
         Long memberId = memberService.memberSave(form);
         log.info("회원가입 END");
 
-        return "/login";
+        return "/login/login";
     }
 
     @GetMapping("member/login")
     public String memberLoginPage() {
-        return "/login";
+        return "/login/login";
     }
 
     @PostMapping("member/login")
     public String memberLogin(MemberForm form) {
         if(!memberService.memberLogin(form)){
             log.info("로그인 실패");
-            return "/login";
+            return "/login/login";
         }
         log.info("로그인 성공");
         return "home";

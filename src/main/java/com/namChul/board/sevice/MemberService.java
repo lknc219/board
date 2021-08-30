@@ -54,6 +54,7 @@ public class MemberService implements UserDetailsService {
      * @return
      */
     public boolean memberLogin(MemberForm form) {
+
         if (form.getLoginId()==null) {
             //사실 화면단에서 걸러줘서 여기까지 안옴
             log.info("아이디 미입력");
@@ -66,6 +67,10 @@ public class MemberService implements UserDetailsService {
         }
 
         Optional<Member> findMember = memberRepository.findByLonginId(form.getLoginId());
+
+        if(findMember.isEmpty())
+            return false;
+
         if (!passwordEncoder.matches(form.getPassword(),findMember.get().getPassword())){
             log.info("패스워드 미일치");
             return false;
