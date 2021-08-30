@@ -1,7 +1,6 @@
 package com.namChul.board.sevice;
 
 import com.namChul.board.controller.form.MemberForm;
-import com.namChul.board.domain.Member;
 import com.namChul.board.repository.MemberRepository;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -37,7 +36,7 @@ class MemberServiceTest {
         em.flush();
 
         //when
-        assertEquals(saveId,memberRepository.findByLonginId(memberForm.getLoginId()).get().getId());
+        assertEquals(saveId,memberRepository.findByLonginId(memberForm.getUsername()).get().getId());
 
         //then
 

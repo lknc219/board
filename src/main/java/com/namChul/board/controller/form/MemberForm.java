@@ -8,14 +8,14 @@ import lombok.Setter;
 public class MemberForm {
 
     @NotNull
-    private String loginId;
+    private String username;
     @NotNull
     private String password;
     @NotNull
     private String name;
 
-    public MemberForm(String loginId, String password, String name) {
-        this.loginId = loginId;
+    public MemberForm(String username, String password, String name) {
+        this.username = username;
         this.password = password;
         this.name = name;
     }

@@ -6,7 +6,6 @@ import com.namChul.board.domain.Role;
 import com.namChul.board.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
@@ -37,25 +36,25 @@ public class MemberService implements UserDetailsService {
      */
     public Long memberSave(MemberForm form) {
 
-        Optional<Member> findMember = memberRepository.findByLonginId(form.getLoginId());
+        Optional<Member> findMember = memberRepository.findByUsername(form.getUsername());
         if (!findMember.isEmpty()){
             log.info("아이디 중복");
             throw new IllegalStateException("회원 아이디 중복");
         }
 
-        Member member = new Member(form.getLoginId(),passwordEncoder.encode(form.getPassword()),form.getName());
+        Member member = new Member(form.getUsername(),passwordEncoder.encode(form.getPassword()),form.getName());
         Member saveMember = memberRepository.save(member);
         return saveMember.getId();
     }
 
     /**
-     * 로그인
+     * 로그인 사용x 스프링 시큐리티에서 지원하는 설정을 완료함으로 로그인 세션 지원
      * @param form
      * @return
      */
     public boolean memberLogin(MemberForm form) {
 
-        if (form.getLoginId()==null) {
+        if (form.getUsername()==null) {
             //사실 화면단에서 걸러줘서 여기까지 안옴
             log.info("아이디 미입력");
             return false;
@@ -66,7 +65,7 @@ public class MemberService implements UserDetailsService {
             return false;
         }
 
-        Optional<Member> findMember = memberRepository.findByLonginId(form.getLoginId());
+        Optional<Member> findMember = memberRepository.findByUsername(form.getUsername());
 
         if(findMember.isEmpty())
             return false;
@@ -79,18 +78,20 @@ public class MemberService implements UserDetailsService {
     }
 
     @Override
-    public UserDetails loadUserByUsername(String loginId) throws UsernameNotFoundException {
-        Optional<Member> userEntityWrapper = memberRepository.findByLonginId(loginId);
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        Optional<Member> userEntityWrapper = memberRepository.findByUsername(username);
         Member member = userEntityWrapper.get();
 
         List<GrantedAuthority> authorities = new ArrayList<>();
 
-        if(("superAdmin").equals(loginId)){
+        if(("superAdmin").equals(username)){
             authorities.add(new SimpleGrantedAuthority(Role.ADMIN.getValue()));
         } else {
             authorities.add(new SimpleGrantedAuthority(Role.MEMBER.getValue()));
         }
 
-        return new User(member.getLonginId(),member.getPassword(),authorities);
+        return new User(member.getUsername(),member.getPassword(),authorities);
     }
+
+
 }

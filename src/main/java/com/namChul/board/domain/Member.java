@@ -15,7 +15,7 @@ public class Member {
     @GeneratedValue
     private Long id;
 
-    private String longinId;
+    private String username;
 
     private String password;
 
@@ -29,8 +29,8 @@ public class Member {
     @OneToMany(mappedBy = "member")
     private List<Board> boards = new ArrayList<>();
 
-    public Member(String longinId, String password, String name) {
-        this.longinId = longinId;
+    public Member(String username, String password, String name) {
+        this.username = username;
         this.password = password;
         this.name = name;
         this.UesYn = UseYn.Y;
