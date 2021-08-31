@@ -77,6 +77,11 @@ public class MemberService implements UserDetailsService {
         return true;
     }
 
+    public Long MemberSearchByUsername(String username) {
+        Optional<Member> findMember = memberRepository.findByUsername(username);
+        return findMember.get().getId();
+    }
+
     //이름만 가져와서 비교하면 내부적으로 비밀번호를 DB와 조회해 로그인 처리를 하는것 같음.
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {

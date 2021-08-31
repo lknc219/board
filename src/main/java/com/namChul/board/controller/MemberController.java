@@ -33,7 +33,7 @@ public class MemberController {
             log.info("result Error");
             return "/member/memberJoin";
         }
-        Long memberId = memberService.memberSave(form);
+        memberService.memberSave(form);
         log.info("회원가입 END");
 
         return "/login/login";

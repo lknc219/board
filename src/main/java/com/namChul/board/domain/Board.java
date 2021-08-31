@@ -4,6 +4,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 
 @Entity
@@ -18,8 +19,10 @@ public class Board {
     @JoinColumn(name = "member_id")
     private Member member;
 
+    @NotNull
     private String title;
 
+    @NotNull
     private String content;
 
     @Enumerated(EnumType.STRING)
@@ -31,7 +34,9 @@ public class Board {
 
     public Board(Member member, String title, String content) {
         this.member = member;
+        member.getBoards().add(this);
         this.title = title;
         this.content = content;
     }
+
 }

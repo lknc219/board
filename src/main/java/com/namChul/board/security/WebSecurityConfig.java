@@ -38,12 +38,13 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 //                 페이지 권한 설정
                 .antMatchers("/admin/**").hasRole("ADMIN")
                 .antMatchers("/login/myinfo").hasRole("MEMBER")
+                .antMatchers("/board/write").hasRole("MEMBER")
                 .antMatchers("/**").permitAll()
                 .and() // 로그인 설정
                 .formLogin()
-                .loginPage("/member/join")
+                .loginPage("/member/login")
                 .defaultSuccessUrl("/")
-                .failureUrl("/member/join")
+                .failureUrl("/")
                 .permitAll()
                 .and() // 로그아웃 설정
                 .logout()

@@ -4,21 +4,27 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity
 @Getter @Setter
+@Table(indexes = @Index(name = "i_member", columnList = "username"))
 public class Member {
     @Id
     @GeneratedValue
     private Long id;
 
+    @NotNull
+    @Column(unique = true)
     private String username;
 
+    @NotNull
     private String password;
 
+    @NotNull
     private String name;
 
     @Enumerated(EnumType.STRING)

@@ -12,6 +12,6 @@ RequestMapping
 비밀번호 암호화 후   회원가입 안되는 현상 수정하기
 
 
-카톡 링크 보고 스프링 시큐리티 적용하기
-
 로그인시 로그인버튼 없애고 로그아웃, 내정보 페이지 만들기, 세션유지하나?
+
+BoardController post boardinsert 구현하기

@@ -1,17 +1,18 @@
 package com.namChul.board.controller.form;
 
-import com.sun.istack.NotNull;
 import lombok.Getter;
 import lombok.Setter;
+
+import javax.validation.constraints.NotEmpty;
 
 @Getter @Setter
 public class MemberForm {
 
-    @NotNull
+    @NotEmpty(message = "아이디를 입력해주세요.")
     private String username;
-    @NotNull
+    @NotEmpty(message = "패스워드를 입력해주세요")
     private String password;
-    @NotNull
+//    @NotEmpty(message = "이름을 입력해주세요")
     private String name;
 
     public MemberForm(String username, String password, String name) {
