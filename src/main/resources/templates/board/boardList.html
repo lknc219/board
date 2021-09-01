@@ -16,9 +16,16 @@
             <th>작성 시간</th>
         </tr>
         </thead>
+
         <tbody>
-        <tr></tr>
+        <tr th:each="board : ${board}">
+            <td th:text="${board.id}"></td>
+            <td th:text="${board.title}"></td>
+            <td th:text="${board.member.username}"></td>
+            <td th:text="${board.insertDate}"></td>
+        </tr>
         </tbody>
+
     </table>
 </body>
 </html>
