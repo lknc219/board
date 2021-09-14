@@ -2,6 +2,7 @@ package com.namChul.board.sevice;
 
 import com.namChul.board.controller.form.MemberForm;
 import com.namChul.board.repository.MemberRepository;
+import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,7 +12,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.assertj.core.api.Assertions.*;
+
 
 @ExtendWith(SpringExtension.class)
 @SpringBootTest
@@ -36,7 +38,7 @@ class MemberServiceTest {
         em.flush();
 
         //when
-        assertEquals(saveId,memberRepository.findByLonginId(memberForm.getUsername()).get().getId());
+        assertThat(memberRepository.findByUsername(memberForm.getUsername())).isEqualTo(memberRepository.findById(saveId));
 
         //then
 
@@ -51,9 +53,7 @@ class MemberServiceTest {
         MemberForm memberForm2 = new MemberForm("test1","test1","김남철");
 
         //when
-        assertThrows(IllegalStateException.class, () ->{
-            memberService.memberSave(memberForm2);
-        });
+//        assertThatThrownBy(() -> {memberService.memberSave(memberForm2)}).isInstanceOf(IllegalStateException.class);
 
         //then
     }
